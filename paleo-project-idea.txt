@@ -1,0 +1,8 @@
+tail -n +19 Soricidae.csv | cut -d "," -f 6 | sort | uniq | wc -l
+species (Shrews): 231
+
+tail -n +19 Muridae.csv | cut -d "," -f 6 | sort | uniq | wc -l
+species (Rats): 298
+
+tail -n +19 Canidae.csv | cut -d "," -f 6 | sort | uniq | wc -l
+species (Dogs) : 366
