@@ -1,0 +1,13 @@
+Input/Output: 
+
+a = csv from loop containing each unique family as well as first and last occurance
+b = chronologically order a and organize into plot
+Display graph
+
+Loop Data Manipulation:
+
+set species file to "x"
+for every family in "x":
+	sort into unique families
+	display first and last occurance for each family
+	push to new csv output file
