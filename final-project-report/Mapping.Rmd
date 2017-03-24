@@ -1,0 +1,48 @@
+---
+title: "Mapping"
+output: html_document
+---
+
+``` {r}
+library(ggplot2)
+library(maps)
+
+world_map <- map_data("world")
+
+plot <- ggplot() + coord_fixed() + xlab("") + ylab("")
+
+empty_world_plot <- plot + geom_polygon(data=world_map, aes(x=long, y=lat, group=group), fill = NA, color = "lightblue")
+
+
+Soricidae <- read.csv("/home/eeb177-student/Desktop/EEB-177/eeb-174-final-project/final-project-report/latlong.csv", header = T, as.is = T)
+
+filled_in_world_plot <- empty_world_plot + geom_point(data = Soricidae,aes(x = lng, y = lat), color = "black", size = 0.01) 
+filled_in_world_plot <- filled_in_world_plot + labs(title = "Soricidae Fossil Records", x = "Longitude", y = "Latitude") 
+filled_in_world_plot <- filled_in_world_plot + theme(plot.title = element_text(hjust = 0.5, size=18, face = "bold"), axis.title = element_text(size = 15))
+
+filled_in_world_plot
+
+ggsave(filename = "Fossil_Record_Map.pdf", plot = filled_in_world_plot)
+```
+
+``` {r}
+library(ggplot2)
+library(maps)
+
+world_map <- map_data("world")
+
+plot <- ggplot() + coord_fixed() + xlab("") + ylab("")
+
+empty_world_plot2 <- plot + geom_polygon(data=world_map, aes(x=long, y=lat, group=group), fill = NA, color = "lightblue")
+
+
+Soricidae <- read.csv("/home/eeb177-student/Desktop/EEB-177/eeb-174-final-project/final-project-report/extant.csv", header = T, as.is = T)
+
+filled_in_world_plot2 <- empty_world_plot2 + geom_point(data = Soricidae,aes(x = lng, y = lat), color = "black", size = 1.5) 
+filled_in_world_plot2 <- filled_in_world_plot2 + labs(title = "Extant Soricidae Fossil Records", x = "Longitude", y = "Latitude") 
+filled_in_world_plot2 <- filled_in_world_plot2 + theme(plot.title = element_text(hjust = 0.5, size=18, face = "bold"), axis.title = element_text(size = 15))
+
+filled_in_world_plot2
+
+ggsave(filename = "Fossil_Record_Map_Extant.pdf", plot = filled_in_world_plot2)
+```

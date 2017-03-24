@@ -1,0 +1,40 @@
+---
+title: "project-deadline-6"
+output: html_document
+---
+
+Read in the file
+```{r}
+# Read in the file
+library(ggplot2)
+setwd("/home/eeb177-student/Desktop/EEB-177/eeb-174-final-project/project-deadline-6/")
+
+Soricidae <- read.csv("/home/eeb177-student/Desktop/EEB-177/eeb-174-final-project/final-project-report/Soricidae-ranges.csv", header =F, as.is = T)
+
+names(Soricidae) <- c("genus", "species", "minage", "maxage")
+head(Soricidae)
+```
+
+Create the graph
+```{r}
+Soricidae_occ <- ggplot(Soricidae, aes( species, ymin = maxage, ymax=minage, colour = genus))
+Soricidae_occ <- Soricidae_occ + geom_linerange()
+# Remove the legend
+Soricidae_occ <- Soricidae_occ + theme(legend.position="none") 
+# Flip axis
+Soricidae_occ <- Soricidae_occ + coord_flip() 
+# Change text size
+Soricidae_occ <- Soricidae_occ +  theme(axis.text.y = element_text(size=1.75)) 
+# Remove tick marks on y-axis
+Soricidae_occ <- Soricidae_occ + theme(axis.ticks.y=element_blank()) 
+# Remove excess white space
+Soricidae_occ <- Soricidae_occ + scale_y_continuous(limits=c(0, 40), expand = c(0, 0), breaks=c(0, 10, 20, 30, 40)) 
+# Add title and labels
+Soricidae_occ <- Soricidae_occ + labs(title = "Soricidae Fossil Occurrences", x = "Species", y = "Millions of Years Ago") + theme(plot.title = element_text(hjust = 0.5, size=22, face = "bold"), axis.title =element_text(size=20))  
+Soricidae_occ
+```
+
+Save the graphs as a pdf
+```{r}
+ggsave(filename = "Soricidae-occ.pdf", plot = Soricidae_occ)
+```
